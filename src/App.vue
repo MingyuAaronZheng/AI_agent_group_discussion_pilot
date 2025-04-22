@@ -22,4 +22,18 @@ export default {
 
 <style>
 /* Add global styles if needed */
+input[type="radio"]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  border-width: 0 !important;
+}
+
+/* Target Chrome/Edge/Safari native blue ring */
+input[type="radio"]:focus::-webkit-focus-ring {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
 </style>

@@ -45,10 +45,15 @@ library.add(faGavel)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Add global properties
-Vue.prototype.$server_url = 'https://go.discussionexperiment.com/ccw/api/'
-Vue.prototype.$ws_url = 'ws://go.discussionexperiment.com/ws/chat/'
-Vue.prototype.$chat_url = 'ws://go.discussionexperiment.com/ws/chat/'
-Vue.prototype.$test_mode = false
+// Vue.prototype.$server_url = 'https://go.discussionexperiment.com/ccw/api/'
+// Vue.prototype.$ws_url = 'ws://go.discussionexperiment.com/ws/chat/'
+// Vue.prototype.$chat_url = 'ws://go.discussionexperiment.com/ws/chat/'
+// Vue.prototype.$test_mode = false
+
+Vue.prototype.$server_url = 'http://localhost:8000/ccw/api/'
+Vue.prototype.$ws_url = 'ws://localhost:8000/ws/chat/'
+Vue.prototype.$chat_url = 'ws://localhost:8000/ws/chat/'
+Vue.prototype.$test_mode = true
 
 const store = new Vuex.Store({
   // plugins: [createPersistedState({
@@ -166,15 +171,15 @@ const store = new Vuex.Store({
             const currentTime = Date.now()
             const timeSinceLastActivity = currentTime - state.lastActivityTimestamp
             // console.log('Time since last activity: ' + timeSinceLastActivity) // Debug log
-            // Show warning after 30 seconds of inactivity
-            if (timeSinceLastActivity >= 30000 && !state.inactivityWarningShown) {
+            // Show warning after 45 seconds of inactivity
+            if (timeSinceLastActivity >= 45000 && !state.inactivityWarningShown) {
               // console.log('Showing inactivity warning' + timeSinceLastActivity) // Debug log
               state.inactivityWarningShown = true
               // Emit a custom event that components can listen to
               window.dispatchEvent(new CustomEvent('show-inactivity-warning'))
             }
-            // Remove user after 45 seconds of inactivity
-            if (timeSinceLastActivity >= 45000) {
+            // Remove user after 75 seconds of inactivity
+            if (timeSinceLastActivity >= 75000) {
               // console.log('Removing inactive user' + timeSinceLastActivity) // Debug log
               window.dispatchEvent(new CustomEvent('remove-inactive-user'))
             }
@@ -226,9 +231,11 @@ new Vue({
   data: function () {
     return {
       // AWS
-      server_url: 'https://go.discussionexperiment.com/ccw/api/',
-      chat_url: 'wss://go.discussionexperiment.com/ws/chat/',
-      test_mode: false,
+      // server_url: 'https://go.discussionexperiment.com/ccw/api/',
+      // chat_url: 'wss://go.discussionexperiment.com/ws/chat/',
+      server_url: 'http://localhost:8000/ccw/api/',
+      chat_url: 'ws://localhost:8000/ws/chat/',
+      test_mode: true,
       estimation: null,
       is_loading: false,
       fire_400: false,

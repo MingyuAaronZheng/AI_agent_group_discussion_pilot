@@ -13,6 +13,9 @@
         The study should only take about 1 to 3 minutes to complete. Your responses will be kept completely confidential and used only for research purposes.
         Please note that you can only participate in this study once.
       </p>
+      <p style="color: #d9534f; font-weight: bold;">
+        <strong>Important:</strong> After <u>1 minute and 15 seconds</u> of inactivity, you will be removed from the study.
+      </p>
       <p>
         Ready to get started? Click the button below!
       </p>
