@@ -8,7 +8,8 @@ import QualificationEntrance from '../views/QualificationEntrance.vue'
 /** Common pages - Exit pages**/
 
 /** Errors **/
-import TerminatedParticipation from '@/views/errors/TerminatedParticipation.vue'
+import GoBackTerminatedParticipation from '@/views/errors/GoBackTerminatedParticipation.vue'
+import InactivityTerminatedParticipation from '@/views/errors/InactivityTerminatedParticipation.vue'
 /** Without AI **/
 import PreDSurveySuccess from '@/views/PreDSurveySuccess.vue'
 import PreDSurvey from '@/views/PreDSurvey.vue'
@@ -56,9 +57,14 @@ const routes = [
     component: TimeoutPage
   },
   {
-    path: '/terminatedParticipation',
-    name: 'TerminatedParticipation',
-    component: TerminatedParticipation
+    path: '/GoBackTerminatedParticipation',
+    name: 'GoBackTerminatedParticipation',
+    component: GoBackTerminatedParticipation
+  },
+  {
+    path: '/InactivityTerminatedParticipation',
+    name: 'InactivityTerminatedParticipation',
+    component: InactivityTerminatedParticipation
   }
 ]
 
@@ -95,7 +101,7 @@ router.beforeEach((to, from, next) => {
       'warning'
     ).then((result) => {
       if (result) {
-        next('/terminatedParticipation')
+        next('/GoBackterminatedParticipation')
       } else {
         next(false)
       }

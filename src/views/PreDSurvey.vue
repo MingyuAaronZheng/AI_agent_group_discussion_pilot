@@ -183,7 +183,7 @@ export default {
         .post(this.$root.server_url + 'Update_pre_discussion_survey', body)
         .then((response) => {
           if (response.data.success) {
-            this.$router.push('/WaitingRoom')
+            this.$router.push('/PreDSurveySuccess')
           } else {
             alert(response.data.message)
           }
