@@ -45,15 +45,15 @@ library.add(faGavel)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Add global properties
-// Vue.prototype.$server_url = 'https://go.discussionexperiment.com/ccw/api/'
-// Vue.prototype.$ws_url = 'ws://go.discussionexperiment.com/ws/chat/'
-// Vue.prototype.$chat_url = 'ws://go.discussionexperiment.com/ws/chat/'
-// Vue.prototype.$test_mode = false
+Vue.prototype.$server_url = 'https://go.discussionexperiment.com/ccw/api/'
+Vue.prototype.$ws_url = 'ws://go.discussionexperiment.com/ws/chat/'
+Vue.prototype.$chat_url = 'ws://go.discussionexperiment.com/ws/chat/'
+Vue.prototype.$test_mode = false
 
-Vue.prototype.$server_url = 'http://localhost:8000/ccw/api/'
-Vue.prototype.$ws_url = 'ws://localhost:8000/ws/chat/'
-Vue.prototype.$chat_url = 'ws://localhost:8000/ws/chat/'
-Vue.prototype.$test_mode = true
+// Vue.prototype.$server_url = 'http://localhost:8000/ccw/api/'
+// Vue.prototype.$ws_url = 'ws://localhost:8000/ws/chat/'
+// Vue.prototype.$chat_url = 'ws://localhost:8000/ws/chat/'
+// Vue.prototype.$test_mode = true
 
 const store = new Vuex.Store({
   // plugins: [createPersistedState({
@@ -231,10 +231,10 @@ new Vue({
   data: function () {
     return {
       // AWS
-      // server_url: 'https://go.discussionexperiment.com/ccw/api/',
-      // chat_url: 'wss://go.discussionexperiment.com/ws/chat/',
-      server_url: 'http://localhost:8000/ccw/api/',
-      chat_url: 'ws://localhost:8000/ws/chat/',
+      server_url: 'https://go.discussionexperiment.com/ccw/api/',
+      chat_url: 'wss://go.discussionexperiment.com/ws/chat/',
+      // server_url: 'http://localhost:8000/ccw/api/',
+      // chat_url: 'ws://localhost:8000/ws/chat/',
       test_mode: true,
       estimation: null,
       is_loading: false,
