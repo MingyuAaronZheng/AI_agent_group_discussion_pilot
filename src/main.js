@@ -46,15 +46,15 @@ library.add(faRobot)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Add global properties
-// Vue.prototype.$server_url = 'https://gobackend.discussionexperiment.com/ccw/api/'
-// Vue.prototype.$ws_url = 'wss://gobackend.discussionexperiment.com/ws/chat/'
-// Vue.prototype.$chat_url = 'wss://gobackend.discussionexperiment.com/ws/chat/'
-// Vue.prototype.$test_mode = false
+Vue.prototype.$server_url = 'https://gobackend.discussionexperiment.com/ccw/api/'
+Vue.prototype.$ws_url = 'wss://gobackend.discussionexperiment.com/ws/chat/'
+Vue.prototype.$chat_url = 'wss://gobackend.discussionexperiment.com/ws/chat/'
+Vue.prototype.$test_mode = false
 
-Vue.prototype.$server_url = 'http://127.0.0.1:8000/ccw/api/'
-Vue.prototype.$ws_url = 'ws://127.0.0.1:8000/ws/chat/'
-Vue.prototype.$chat_url = 'ws://127.0.0.1:8000/ws/chat/'
-Vue.prototype.$test_mode = true
+// Vue.prototype.$server_url = 'http://127.0.0.1:8000/ccw/api/'
+// Vue.prototype.$ws_url = 'ws://127.0.0.1:8000/ws/chat/'
+// Vue.prototype.$chat_url = 'ws://127.0.0.1:8000/ws/chat/'
+// Vue.prototype.$test_mode = true
 
 const store = new Vuex.Store({
   // plugins: [createPersistedState({
@@ -274,13 +274,13 @@ new Vue({
   data: function () {
     return {
       // localhost
-      server_url: 'http://127.0.0.1:8000/ccw/api/',
-      chat_url: 'ws://127.0.0.1:8000/ws/chat/',
-      test_mode: true,
+      // server_url: 'http://127.0.0.1:8000/ccw/api/',
+      // chat_url: 'ws://127.0.0.1:8000/ws/chat/',
+      // test_mode: true,
       // AWS
-      // server_url: 'https://gobackend.discussionexperiment.com/ccw/api/',
-      // chat_url: 'wss://gobackend.discussionexperiment.com/ws/chat/',
-      // test_mode: false,
+      server_url: 'https://gobackend.discussionexperiment.com/ccw/api/',
+      chat_url: 'wss://gobackend.discussionexperiment.com/ws/chat/',
+      test_mode: false,
       estimation: null,
       is_loading: false,
       fire_400: false,
