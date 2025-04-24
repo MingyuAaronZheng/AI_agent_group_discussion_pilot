@@ -13,7 +13,6 @@ import InactivityTerminatedParticipation from '@/views/errors/InactivityTerminat
 /** Without AI **/
 import PreDSurveySuccess from '@/views/PreDSurveySuccess.vue'
 import PreDSurvey from '@/views/PreDSurvey.vue'
-import TimeoutPage from '@/views/TimeoutPage.vue'
 
 Vue.use(VueRouter)
 Vue.use(VueSimpleAlert)
@@ -52,11 +51,6 @@ const routes = [
     component: PreDSurveySuccess
   },
   {
-    path: '/timeout',
-    name: 'Timeout',
-    component: TimeoutPage
-  },
-  {
     path: '/GoBackTerminatedParticipation',
     name: 'GoBackTerminatedParticipation',
     component: GoBackTerminatedParticipation
@@ -80,7 +74,7 @@ router.beforeEach((to, from, next) => {
   let toIndex
 
   // Define EndingPages as an array of pages that are not part of the study flow
-  const EndingPages = ['KickOut', 'FailPairing', 'FailAttention', 'NoEntrance', 'TerminatedParticipation']
+  const EndingPages = ['KickOut', 'FailPairing', 'FailAttention', 'NoEntrance', 'InactivityTerminatedParticipation', 'GoBackTerminatedParticipation']
   // If the page is an ending page, set the index to 1000
   if (EndingPages.includes(from.name)) {
     fromIndex = 1000
@@ -101,7 +95,7 @@ router.beforeEach((to, from, next) => {
       'warning'
     ).then((result) => {
       if (result) {
-        next('/GoBackterminatedParticipation')
+        next('/GoBackTerminatedParticipation')
       } else {
         next(false)
       }
