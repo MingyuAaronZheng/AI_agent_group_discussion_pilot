@@ -40,6 +40,27 @@
       </div>
     </div>
 
+    <!-- Optional feedback textarea on last page -->
+    <div v-if="currentPage === totalPages" class="policy-statement feedback-area mb-3">
+      <div class="statement-header">
+        <div class="statement-text highlight-statement">
+          [Optional] Please let us know if you have any suggestions about our survey
+        </div>
+      </div>
+      <b-form-group>
+        <b-form-textarea
+          v-model="suggestions"
+          placeholder="Your feedback here..."
+          rows="4"
+          @change="onFormInteraction"
+        ></b-form-textarea>
+      </b-form-group>
+    </div>
+
+    <div class="page-indicator text-center mb-3">
+      Page: {{ currentPage }} / {{ totalPages }}
+    </div>
+
     <!-- Final submit button -->
     <div class="button-area">
       <b-button v-if="currentPage === 1" variant="primary" size="lg" @click="goToNextPage" :disabled="!isCurrentPageComplete">
@@ -95,7 +116,9 @@ export default {
       randomizedStatements: [],
       // Paging controls
       pageSize: 6,
-      currentPage: 1
+      currentPage: 1,
+      // Optional open-ended feedback
+      suggestions: ''
     }
   },
   mounted () {
@@ -116,6 +139,9 @@ export default {
       const start = (this.currentPage - 1) * this.pageSize
       const end = start + this.pageSize
       return this.responses.slice(start, end).every(r => r.agreement !== null)
+    },
+    totalPages () {
+      return Math.ceil((this.randomizedStatements || []).length / this.pageSize)
     }
   },
   watch: {
@@ -175,6 +201,8 @@ export default {
       const body = new FormData()
       body.append('subject_id', this.$store.state.subject_id)
       body.append('responses', JSON.stringify(mappedResponses))
+      // Append optional feedback
+      body.append('suggestions', this.suggestions)
       console.log('PreDSurvey responses:', mappedResponses)
       // Store the responses in frontend for later comparison with post-discussion survey
       this.$store.commit('setPreDiscussionResponses', mappedResponses)
