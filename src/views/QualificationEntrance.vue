@@ -43,7 +43,13 @@ export default {
   methods: {
     prolific_processor: function (url) {
       // https://dev.d1uau7ss3lp78y.amplifyapp.com/qualificationentrance/?PROLIFIC_PID={{%PROLIFIC_PID%}}&STUDY_ID={{%STUDY_ID%}}&SESSION_ID={{%SESSION_ID%}}
-      this.platform = 'prolific'
+      if (url.includes('localhost')) {
+        this.platform = 'localhost'
+      } else {
+        this.platform = 'aws'
+      }
+
+      this.$store.commit('assign_platform', {platform: this.platform})
       let prolificArray = url.split('?')[1].split('&')
       this.worker_id = prolificArray[0].split('=')[1]
       this.study_id = prolificArray[1].split('=')[1]
@@ -60,7 +66,7 @@ export default {
         body.append('study_id', this.study_id)
         body.append('session_id', this.session_id)
 
-        axios.post(this.$root.server_url + 'create_subject', body)
+        axios.post(this.$server_url + 'create_subject', body)
           .then(response => {
             if (response.data.success === true) {
               this.$store.commit('assign_subject_id', {subject_id: response.data.subject_id})

@@ -208,7 +208,7 @@ export default {
       this.$store.commit('setPreDiscussionResponses', mappedResponses)
       // Submit the data to the server
       axios
-        .post(this.$root.server_url + 'Update_pre_discussion_survey', body)
+        .post(this.$server_url + 'Update_pre_discussion_survey', body)
         .then((response) => {
           if (response.data.success) {
             this.$router.push('/PreDSurveySuccess')
@@ -243,7 +243,7 @@ export default {
     handleInactiveUser () {
       const body = new FormData()
       body.append('subject_id', this.$store.state.subject_id)
-      axios.post(this.$root.server_url + 'terminate_participation', body)
+      axios.post(this.$server_url + 'terminate_participation', body)
         .then(response => {
           this.$router.push('/InactivityTerminatedParticipation')
         })

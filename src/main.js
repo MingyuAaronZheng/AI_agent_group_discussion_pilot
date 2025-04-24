@@ -215,6 +215,20 @@ const store = new Vuex.Store({
     },
     setWebSocketConnected (state, status) {
       state.websocketConnected = status
+    },
+    assign_platform (state, payload) {
+      state.platform = payload.platform
+      if (state.platform === 'localhost') {
+        Vue.prototype.$server_url = 'http://127.0.0.1:8000/ccw/api/'
+        Vue.prototype.$ws_url = 'ws://127.0.0.1:8000/ws/chat/'
+        Vue.prototype.$chat_url = 'ws://127.0.0.1:8000/ws/chat/'
+        Vue.prototype.$test_mode = true
+      } else {
+        Vue.prototype.$server_url = 'https://gobackend.discussionexperiment.com/ccw/api/'
+        Vue.prototype.$ws_url = 'wss://gobackend.discussionexperiment.com/ws/chat/'
+        Vue.prototype.$chat_url = 'wss://gobackend.discussionexperiment.com/ws/chat/'
+        Vue.prototype.$test_mode = false
+      }
     }
   },
   actions: {
@@ -273,14 +287,9 @@ window.addEventListener('beforeunload', (event) => {
 new Vue({
   data: function () {
     return {
-      // localhost
-      // server_url: 'http://127.0.0.1:8000/ccw/api/',
-      // chat_url: 'ws://127.0.0.1:8000/ws/chat/',
-      // test_mode: true,
-      // AWS
-      server_url: 'https://gobackend.discussionexperiment.com/ccw/api/',
-      chat_url: 'wss://gobackend.discussionexperiment.com/ws/chat/',
-      test_mode: false,
+      server_url: Vue.prototype.$server_url,
+      chat_url: Vue.prototype.$chat_url,
+      test_mode: Vue.prototype.$test_mode,
       estimation: null,
       is_loading: false,
       fire_400: false,
@@ -357,7 +366,7 @@ new Vue({
         this.$store.commit('new_message', received_msg)
         const formData = new FormData()
         formData.append('group_id', this.$store.state.group_id)
-        axios.post(this.$root.server_url + 'get_group_current_turn', formData)
+        axios.post(this.$server_url + 'get_group_current_turn', formData)
           .then(response => {
             if (response.data.success) {
               this.$store.state.current_turn = response.data.current_turn
@@ -430,7 +439,7 @@ new Vue({
       }
       let body = new FormData()
       body.append('subject_id', subjectId)
-      axios.post(this.$root.server_url + 'set_not_ready_to_pair', body)
+      axios.post(this.$server_url + 'set_not_ready_to_pair', body)
         .then(response => {
           console.log('Set not ready to pair response:', response.data)
         })
